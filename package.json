@@ -1,0 +1,39 @@
+{
+  "name": "react-categorized-tag-input",
+  "version": "0.1.0",
+  "description": "React.js component for making tag autocompletion inputs with categorized results.",
+  "main": "categorized-tag-input.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel/register --recursive",
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvader/react-categorized-tag-input.git"
+  },
+  "keywords": [
+    "tag",
+    "autocomplete",
+    "input",
+    "categorized",
+    "react"
+  ],
+  "author": "Miguel Molina <hi@mvader.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mvader/react-categorized-tag-input/issues"
+  },
+  "homepage": "https://github.com/mvader/react-categorized-tag-input#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "expect": "^1.12.0",
+    "jsdom": "<4.0.0",
+    "mocha": "^2.3.3",
+    "mocha-jsdom": "^1.0.0",
+    "react": "^0.13.3",
+    "webpack": "^1.12.2"
+  }
+}

@@ -1,0 +1,154 @@
+import expect from 'expect';
+import React from 'react/addons';
+import jsdomReact from './jsdomReact';
+
+import Tag from '../src/Tag.jsx';
+
+const { TestUtils } = React.addons;
+
+function tag(props) {
+  return TestUtils.renderIntoDocument(React.createElement(Tag, props));
+}
+
+function findContentSpans(t) {
+  return TestUtils.scryRenderedDOMComponentsWithTag(t, 'span');
+}
+
+function props(props) {
+  return Object.assign({}, {
+    input: 'foo',
+    text: 'fooable',
+  }, props);
+}
+
+describe('Tag', () => {
+  jsdomReact();
+
+  describe('with the input at the start', () => {
+    it('should have two spans, the first is the match', () => {
+      let t = tag({
+        input: 'foo',
+        text: 'fooable',
+      });
+
+      let spans = findContentSpans(t);
+      expect(spans.length).toBe(2);
+      expect(spans[0].props.className).toBe('cti__tag__content--match');
+      expect(spans[0].props.children).toBe('foo');
+      expect(spans[1].props.className).toBe('cti__tag__content--regular');
+      expect(spans[1].props.children).toBe('able');
+    });
+  });
+
+  describe('with the input at the middle', () => {
+    it('should have three spans, the second is the match', () => {
+      let t = tag({
+        input: 'oab',
+        text: 'fooable',
+      });
+
+      let spans = findContentSpans(t);
+      expect(spans.length).toBe(3);
+      expect(spans[0].props.className).toBe('cti__tag__content--regular');
+      expect(spans[0].props.children).toBe('fo');
+      expect(spans[1].props.className).toBe('cti__tag__content--match');
+      expect(spans[1].props.children).toBe('oab');
+      expect(spans[2].props.className).toBe('cti__tag__content--regular');
+      expect(spans[2].props.children).toBe('le');
+    });
+  });
+
+  describe('with the input at the end', () => {
+    it('should have two spans, the last is the match', () => {
+      let t = tag({
+        input: 'able',
+        text: 'fooable',
+      });
+
+      let spans = findContentSpans(t);
+      expect(spans.length).toBe(2);
+      expect(spans[0].props.className).toBe('cti__tag__content--regular');
+      expect(spans[0].props.children).toBe('foo');
+      expect(spans[1].props.className).toBe('cti__tag__content--match');
+      expect(spans[1].props.children).toBe('able');
+    });
+  });
+
+  describe('if the tag is addable', () => {
+    it('should trigger onAdd callback', done => {
+      let added = false;
+      let t = tag(props({
+        addable: true,
+        onAdd: () => {
+          added = true;
+        }
+      }));
+
+      TestUtils.Simulate.click(t.getDOMNode());
+
+      setImmediate(() => {
+        expect(added).toBe(true);
+        done();
+      });
+    });
+  });
+
+  describe('if the tag is deletable', () => {
+    function findDelete(t) {
+      return TestUtils.findRenderedDOMComponentWithClass(t, 'cti__tag__delete')
+        .getDOMNode();
+    }
+
+    it('should trigger onDelete callback', done => {
+      let deleted = false;
+      let t = tag(props({
+        deletable: true,
+        onDelete: () => {
+          deleted = true;
+        }
+      }));
+
+      TestUtils.Simulate.click(findDelete(t));
+
+      setImmediate(() => {
+        expect(deleted).toBe(true);
+        done();
+      });
+    });
+
+    describe('and addable', () => {
+      it('should trigger onDelete callback but not onAdd', done => {
+        let added = false;
+        let deleted = false;
+        let t = tag(props({
+          addable: true,
+          deletable: true,
+          onAdd: () => {
+            added = true;
+          },
+          onDelete: () => {
+            deleted = true;
+          }
+        }));
+
+        TestUtils.Simulate.click(findDelete(t));
+
+        setImmediate(() => {
+          expect(added).toBe(false);
+          expect(deleted).toBe(true);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('when is selected', () => {
+    it('should have the class cti__tag--selected', () => {
+      let t = tag(props({
+        selected: true
+      }));
+
+      expect(t.getDOMNode().className.split(' ')[1]).toBe('cti__tag--selected');
+    });
+  });
+});
