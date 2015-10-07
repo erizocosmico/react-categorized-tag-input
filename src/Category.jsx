@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Tag from './Tag.jsx';
+
 const { PropTypes } = React;
 
 const Category = React.createClass({
@@ -19,7 +21,7 @@ const Category = React.createClass({
     return () => {
       this.props.onAdd({
         category: this.props.category,
-        item: this.props.item
+        item: item
       });
     };
   },
@@ -29,8 +31,7 @@ const Category = React.createClass({
     this.onAdd(this.props.input)();
   },
 
-  render() {
-    let addBtn = null;
+  getItems() {
     let fullMatch = false;
     let items = this.props.items.filter(i => {
       if (i === this.props.input) {
@@ -39,24 +40,43 @@ const Category = React.createClass({
       return i.indexOf(this.props.input) >= 0;
     });
 
-    if (items.length === 0) {
-      return null;
-    }
-
     items = items.map((item, i) => {
       return (
         <Tag selected={i === this.props.selectedItem && this.props.selected}
           input={this.props.input} text={item} addable={true} deletable={false}
-          onAdd={this.onAdd(item)} />
+          onAdd={this.onAdd(item)} key={item + '_' + i} />
       );
     });
 
+    return {
+      items,
+      fullMatch
+    };
+  },
+
+  getAddBtn(fullMatch, selected) {
     if (this.props.addNew && !fullMatch) {
-      addBtn = (
-        <button className='cti__category__add-item' onClick={this.onCreateNew}>
-          {'Create new ' + (this.props.type || this.props.title) + `"${this.props.input}"`}
+      return (
+        <button className={'cti__category__add-item' + (selected ? ' cti-selected' : '')}
+          onClick={this.onCreateNew}>
+          {'Create new ' + (this.props.type || this.props.title) + ` "${this.props.input}"`}
         </button>
       );
+    }
+
+    return null;
+  },
+
+  render() {
+    let { items, fullMatch } = this.getItems();
+    let addBtn = this.getAddBtn(
+      fullMatch,
+      items.length === 0 && this.props.selected ||
+      this.props.selectedItem >= items.length
+    );
+
+    if (items.length === 0 && !this.props.addNew) {
+      return null;
     }
 
     return (
@@ -70,3 +90,5 @@ const Category = React.createClass({
     );
   }
 });
+
+export default Category;

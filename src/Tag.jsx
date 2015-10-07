@@ -59,7 +59,7 @@ const Tag = React.createClass({
           dangerouslySetInnerHTML={{ __html: '&times;' }} />
       );
     }
-    let cls = 'cti__tag' + (this.props.selected ? ' cti__tag--selected' : '');
+    let cls = 'cti__tag' + (this.props.selected ? ' cti-selected' : '');
 
     return (
       <div className={cls} onClick={this.onClick}>

@@ -143,12 +143,12 @@ describe('Tag', () => {
   });
 
   describe('when is selected', () => {
-    it('should have the class cti__tag--selected', () => {
+    it('should have the class cti-selected', () => {
       let t = tag(props({
         selected: true
       }));
 
-      expect(t.getDOMNode().className.split(' ')[1]).toBe('cti__tag--selected');
+      expect(t.getDOMNode().className.split(' ')[1]).toBe('cti-selected');
     });
   });
 });

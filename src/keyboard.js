@@ -6,6 +6,10 @@ export function isEnter(e) {
   return e.keyCode === 13;
 }
 
+export function isBackspace(e) {
+  return e.keyCode === 8;
+}
+
 export function direction(e) {
   switch (e.keyCode) {
   case 37:
