@@ -56,12 +56,13 @@ const Category = React.createClass({
 
   getAddBtn(fullMatch, selected) {
     if (this.props.addNew && !fullMatch) {
-      return (
+      return [
+        <span className='cti__category__or'>or</span>,
         <button className={'cti__category__add-item' + (selected ? ' cti-selected' : '')}
           onClick={this.onCreateNew}>
           {'Create new ' + (this.props.type || this.props.title) + ` "${this.props.input}"`}
         </button>
-      );
+      ];
     }
 
     return null;
@@ -71,8 +72,8 @@ const Category = React.createClass({
     let { items, fullMatch } = this.getItems();
     let addBtn = this.getAddBtn(
       fullMatch,
-      items.length === 0 && this.props.selected ||
-      this.props.selectedItem >= items.length
+      (items.length === 0 || this.props.selectedItem >= items.length) &&
+      this.props.selected
     );
 
     if (items.length === 0 && !this.props.addNew) {
