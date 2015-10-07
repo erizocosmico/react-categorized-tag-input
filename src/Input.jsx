@@ -19,14 +19,6 @@ const Input = React.createClass({
     this.refs.input.getDOMNode().focus();
   },
 
-  componentDidMount() {
-    this.resizeInput();
-  },
-
-  componentDidUpdate() {
-    this.resizeInput();
-  },
-
   resizeInput() {
     let node = this.refs.input.getDOMNode();
     node.style.width = (node.scrollWidth + 8) + 'px';
@@ -36,7 +28,7 @@ const Input = React.createClass({
     return this.props.tags.map((t, i) => {
       return (
         <Tag selected={false} input={t} text={t} addable={false}
-          deletable={false} key={t + '_' + i}
+          deletable={true} key={t + '_' + i}
           onDelete={() => this.props.onTagDeleted(i)} />
       );
     });
@@ -49,6 +41,7 @@ const Input = React.createClass({
           {this.getTags()}
         </div>
         <input type='text' ref='input' value={this.props.value}
+          size={this.props.value.length + 2}
           onFocus={this.props.openPanel} onBlur={this.props.closePanel}
           onChange={this.props.onValueChange} onKeyDown={this.props.onKeyDown}
           className='cti__input__input' />

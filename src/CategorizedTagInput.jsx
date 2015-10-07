@@ -71,7 +71,7 @@ const CategorizedTagInput = React.createClass({
 
   onValueChange(e) {
     let value = e.target.value;
-    this.setState({ value, panelOpened: val.trim().length > 0 });
+    this.setState({ value, panelOpened: value.trim().length > 0 });
     this.filterCategories(value);
   },
 
@@ -89,7 +89,7 @@ const CategorizedTagInput = React.createClass({
     this.setState({
       tags: this.state.tags.concat([item]),
       value: '',
-      panelOpened: true
+      panelOpened: false
     });
   },
 
