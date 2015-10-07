@@ -12,7 +12,7 @@ function category(props) {
 
 function props(p = {}) {
   return Object.assign({}, {
-    items: ['foo', 'bar', 'baz', 'foobarbaz'],
+    items: ['foo', 'foobarbaz'],
     input: 'fo',
     title: 'Things',
     selected: true,
@@ -70,13 +70,13 @@ describe('Category', () => {
     expect(tags[0].getDOMNode().textContent).toBe('foo');
     expect(tags[1].getDOMNode().textContent).toBe('foobarbaz');
 
-    c = category(props({ input: 'bar' }));
+    c = category(props({ input: 'bar', items: ['bar', 'foobarbaz'] }));
     tags = findTags(c);
     expect(tags.length).toBe(2);
     expect(tags[0].getDOMNode().textContent).toBe('bar');
     expect(tags[1].getDOMNode().textContent).toBe('foobarbaz');
 
-    c = category(props({ input: 'ksajdfhskjf' }));
+    c = category(props({ input: 'ksajdfhskjf', items: [] }));
     tags = findTags(c);
     expect(tags.length).toBe(0);
   });
@@ -84,18 +84,11 @@ describe('Category', () => {
   describe('when there are no matching elements', () => {
     describe('and addNew is true', () => {
       it('should not show any tags, just the new button', () => {
-        let c = category(props({ input: 'asd' }));
+        let c = category(props({ input: 'asd', items: [] }));
         expect(findTags(c).length).toBe(0);
         let btn = findAddBtn(c);
         expect(btn).toNotBe(undefined);
         expect(btn.getDOMNode().innerHTML).toBe('Create new thing "asd"');
-      });
-    });
-
-    describe('and addNew is false', () => {
-      it('should render nothing', () => {
-        let c = category(props({ input: 'asd', addNew: false }));
-        expect(c.getDOMNode()).toBe(null);
       });
     });
   });
@@ -141,7 +134,7 @@ describe('Category', () => {
 
     describe('and there is no matched item', () => {
       it('should select the create button', () => {
-        let c = category(props({ selectedItem: 0, input: 'asd' }));
+        let c = category(props({ selectedItem: 0, items: [], input: 'asd' }));
         expect(isSelected(findAddBtn(c))).toBe(true);
       });
     });

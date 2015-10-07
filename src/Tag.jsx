@@ -15,7 +15,8 @@ const Tag = React.createClass({
 
   tagContent() {
     let content = [];
-    let startIndex = this.props.text.indexOf(this.props.input);
+    let startIndex = this.props.text.trim().toLowerCase()
+      .indexOf(this.props.input.trim().toLowerCase());
     let endIndex = startIndex + this.props.input.length;
 
     if (startIndex > 0) {

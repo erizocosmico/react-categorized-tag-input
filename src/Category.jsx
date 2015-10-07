@@ -33,14 +33,14 @@ const Category = React.createClass({
 
   getItems() {
     let fullMatch = false;
-    let items = this.props.items.filter(i => {
-      if (i === this.props.input) {
+    for (let i = 0, len = this.props.items.length; i < len; i++) {
+      if (this.props.items[i] === this.props.input) {
         fullMatch = true;
+        break;
       }
-      return i.indexOf(this.props.input) >= 0;
-    });
+    }
 
-    items = items.map((item, i) => {
+    let items = this.props.items.map((item, i) => {
       return (
         <Tag selected={i === this.props.selectedItem && this.props.selected}
           input={this.props.input} text={item} addable={true} deletable={false}
@@ -75,10 +75,6 @@ const Category = React.createClass({
       (items.length === 0 || this.props.selectedItem >= items.length) &&
       this.props.selected
     );
-
-    if (items.length === 0 && !this.props.addNew) {
-      return null;
-    }
 
     return (
       <div className='cti__category'>

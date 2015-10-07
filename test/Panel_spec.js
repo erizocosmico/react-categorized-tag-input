@@ -19,18 +19,18 @@ function props(p = {}) {
     categories: [
       {
         id: 1,
-        items: ['foo', 'bar', 'baz'],
+        items: ['rabbit'],
         title: 'Things',
         type: 'thing'
       },
       {
         id: 2,
-        items: ['oof', 'rab', 'zab'],
+        items: ['rab'],
         title: 'Reversed things',
         type: 'reversed thing'
       }
     ],
-    selection: { category: 2, item: 1 },
+    selection: { category: 1, item: 1 },
     onAdd: () => {},
     input: 'ra',
     addNew: true
@@ -50,14 +50,5 @@ describe('Panel', () => {
     let selected = TestUtils.scryRenderedDOMComponentsWithClass(p, 'cti-selected');
     expect(selected.length).toBe(1);
     expect(selected[0].getDOMNode().textContent).toBe('Create new reversed thing "ra"');
-  });
-
-  describe('when addNew is false', () => {
-    describe('and at only one category has matches', () => {
-      it('should render just one category', () => {
-        let p = panel(props({ addNew: false }));
-        expect(findCategories(p).length).toBe(1);
-      });
-    });
   });
 });
