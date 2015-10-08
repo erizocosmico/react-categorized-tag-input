@@ -22,7 +22,7 @@ const Panel = React.createClass({
           input={this.props.input} addNew={this.props.addNew}
           type={c.type} onAdd={this.props.onAdd} single={c.single} />
       );
-    }).filter(c => c !== null);
+    });
   },
 
   render() {

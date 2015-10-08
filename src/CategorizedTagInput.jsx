@@ -37,7 +37,7 @@ const CategorizedTagInput = React.createClass({
       c = Object.assign({}, c, {
         items: c.items.filter(this.filterItems(input))
       });
-      return (c.items.length === 0 && !this.state.addNew) ? null : c;
+      return (c.items.length === 0 && (!this.state.addNew || c.single)) ? null : c;
     }).filter(c => c !== null);
 
     let selection = this.state.selection;
@@ -81,10 +81,13 @@ const CategorizedTagInput = React.createClass({
   },
 
   onTagDeleted(i) {
+    let newTags = this.state.tags.slice(0, i)
+      .concat(this.state.tags.slice(i+1));
     this.setState({
-      tags: this.state.tags.slice(0, i).concat(this.state.tags.slice(i+1))
+      tags: newTags
     });
-    this.props.onChange(this.state.tags);
+
+    this.props.onChange(newTags);
   },
 
   onAdd(newTag) {
@@ -92,13 +95,16 @@ const CategorizedTagInput = React.createClass({
     if (typeof this.props.transformTag === 'function') {
       item = this.props.transformTag(category, item);
     }
+
+    let newTags = this.state.tags.concat([item]);
     this.setState({
-      tags: this.state.tags.concat([item]),
+      tags: newTags,
       value: '',
       panelOpened: true
     });
+
     this.refs.input.focusInput();
-    this.props.onChange(this.state.tags);
+    this.props.onChange(newTags);
   },
 
   addSelectedTag() {

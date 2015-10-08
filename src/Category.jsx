@@ -80,10 +80,6 @@ const Category = React.createClass({
   },
 
   render() {
-    if (this.props.single && this.props.items.length === 0) {
-      return null;
-    }
-
     let { items, fullMatch } = this.getItems();
     let addBtn = this.getAddBtn(
       fullMatch,
