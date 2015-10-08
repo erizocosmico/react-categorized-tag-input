@@ -56,7 +56,7 @@ const Tag = React.createClass({
     let deleteBtn = null;
     if (this.props.deletable) {
       deleteBtn = (
-        <button className='cti__tag__delete' onClick={this.onDelete}
+        <span className='cti__tag__delete' onClick={this.onDelete}
           dangerouslySetInnerHTML={{ __html: '&times;' }} />
       );
     }
