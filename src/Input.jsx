@@ -37,14 +37,13 @@ const Input = React.createClass({
   render() {
     return (
       <div className='cti__input' onClick={this.focusInput}>
-        <div className='cti__input__tags'>
-          {this.getTags()}
-        </div>
+        {this.getTags()}
         <input type='text' ref='input' value={this.props.value}
           size={this.props.value.length + 2}
           onFocus={this.props.openPanel} onBlur={this.props.closePanel}
           onChange={this.props.onValueChange} onKeyDown={this.props.onKeyDown}
           className='cti__input__input' />
+        <div className='cti__input__arrow' />
       </div>
     );
   }

@@ -8,12 +8,27 @@
 
 .cti__root * {
   box-sizing: border-box;
+  outline: none;
 }
 
 .cti__input {
   border: 1px solid rgb(220, 220, 220);
-  padding: .1em .2em;
+  padding: .1em 24px .1em .1em;
   min-height: 38px;
+  position: relative;
+}
+
+.cti__input__arrow {
+  position: absolute;
+  display: block;
+  width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid rgb(140, 140, 140);
+  right: 10px;
+  top: 50%;
+  margin-top: -2px;
 }
 
 .cti__input__tags, .cti__input__input {
@@ -22,10 +37,11 @@
 }
 
 .cti__input__input {
-  outline: none;
   max-width: 100%;
-  padding: .6em 0;
+  padding: .4em 0;
   margin: .1em 0;
+  font-size: 1em;
+  border: none;
 }
 
 .cti__tag {
@@ -37,6 +53,8 @@
   display: inline-block;
   margin: .1em .4em;
   cursor: pointer;
+  word-break: break-all;
+  max-width: 100%;
 }
 
 .cti__tag__content--match {
@@ -82,4 +100,15 @@
   background-color: rgb(229, 241, 255);
   border: 1px solid rgb(207, 219, 234);
   border-radius: 3px;
+}
+
+.cti__category {
+  padding: .4em;
+}
+
+.cti__category__title {
+  padding: .3em 0;
+  margin: 0;
+  color: rgb(200, 200, 200);
+  font-weight: normal;
 }
