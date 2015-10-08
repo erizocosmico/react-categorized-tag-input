@@ -7,7 +7,10 @@ const { PropTypes } = React;
 const Category = React.createClass({
   propTypes: {
     items: PropTypes.array.isRequired,
-    category: PropTypes.number.isRequired,
+    category: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired,
     title: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired,
     selectedItem: PropTypes.number.isRequired,
@@ -57,8 +60,10 @@ const Category = React.createClass({
   getAddBtn(fullMatch, selected) {
     if (this.props.addNew && !fullMatch) {
       return [
-        <span className='cti__category__or'>or</span>,
-        <button className={'cti__category__add-item' + (selected ? ' cti-selected' : '')}
+        this.props.items.length > 0 ?
+          <span key='cat_or' className='cti__category__or'>or</span> :
+          null,
+        <button key='add_btn' className={'cti__category__add-item' + (selected ? ' cti-selected' : '')}
           onClick={this.onCreateNew}>
           {'Create new ' + (this.props.type || this.props.title) + ` "${this.props.input}"`}
         </button>

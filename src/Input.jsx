@@ -27,7 +27,7 @@ const Input = React.createClass({
   getTags() {
     return this.props.tags.map((t, i) => {
       return (
-        <Tag selected={false} input={t} text={t} addable={false}
+        <Tag selected={false} input='' text={t} addable={false}
           deletable={true} key={t + '_' + i}
           onDelete={() => this.props.onTagDeleted(i)} />
       );

@@ -39,6 +39,11 @@
   cursor: pointer;
 }
 
+.cti__tag__content--match {
+  color: black;
+  font-weight: bold;
+}
+
 .cti__tag__delete, .cti__tag__content, .cti__tag__content > span {
   display: inline-block;
   vertical-align: middle;

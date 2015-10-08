@@ -66,7 +66,9 @@ const CategorizedTagInput = React.createClass({
   },
 
   closePanel() {
-    this.setState({ panelOpened: false });
+    setTimeout(() => {
+      this.setState({ panelOpened: false });
+    }, 150);
   },
 
   onValueChange(e) {
@@ -89,13 +91,18 @@ const CategorizedTagInput = React.createClass({
     this.setState({
       tags: this.state.tags.concat([item]),
       value: '',
-      panelOpened: false
+      panelOpened: true
     });
+    this.refs.input.focusInput();
   },
 
   addSelectedTag() {
-    this.onAdd(this.state.categories[this.state.selection.category]
-      .items[this.state.selection.item]);
+    let category = this.state.categories[this.state.selection.category];
+    let item = category.items[this.state.selection.item];
+    this.onAdd({
+      category: category.id,
+      item: item || this.state.value
+    });
   },
 
   onKeyDown(e) {
@@ -103,6 +110,7 @@ const CategorizedTagInput = React.createClass({
     switch (e.keyCode) {
     case key.TAB:
     case key.ENTER:
+    case key.COMMA:
       e.preventDefault();
       this.addSelectedTag();
       break;
@@ -123,7 +131,7 @@ const CategorizedTagInput = React.createClass({
       result = this.state.selection.category - 1;
       this.setState({selection: {
         category: result >= 0 ? result : 0,
-        item: this.state.selection.item
+        item: 0
       }});
       break;
     case key.RIGHT:
@@ -131,28 +139,32 @@ const CategorizedTagInput = React.createClass({
       let cat = this.state.categories[this.state.selection.category];
       this.setState({selection: {
         category: this.state.selection.category,
-        item: result >= cat.items.length ? result : cat.items.length - 1
+        item: result <= cat.items.length ? result : cat.items.length
       }});
       break;
     case key.DOWN:
       result = this.state.selection.category + 1;
       let cats = this.state.categories;
       this.setState({selection: {
-        category: result >= cats.length ? result : cats.length - 1,
-        item: this.state.selection.item
+        category: result < cats.length ? result : cats.length - 1,
+        item: 0
       }});
       break;
     }
   },
 
+  value() {
+    return this.state.tags;
+  },
+
   render() {
     return (
       <div className='cti__root'>
-        <Input openPanel={this.openPanel} closePanel={this.openPanel}
+        <Input openPanel={this.openPanel} closePanel={this.closePanel}
           onValueChange={this.onValueChange} onTagDeleted={this.onTagDeleted}
           onKeyDown={this.onKeyDown} value={this.state.value}
-          tags={this.state.tags} />
-        {this.state.panelOpened ? <Panel categories={this.state.categories}
+          tags={this.state.tags} ref='input' />
+        {this.state.panelOpened && this.state.value.length > 0 ? <Panel categories={this.state.categories}
           selection={this.state.selection} onAdd={this.onAdd}
           input={this.state.value}
           addNew={this.props.addNew === undefined ? true : this.props.addNew} /> : ''}
