@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Input from '../../src/index';
+import Input from './src/index';
 
 const categories = [
   {

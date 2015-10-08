@@ -5,12 +5,12 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:5000',
     'webpack/hot/dev-server',
-    './test/manual/index'
+    './index'
   ],
   output: {
-    path: path.join(__dirname, 'test/manual/'),
+    path: path.join(__dirname, '/'),
     filename: 'bundle.js',
-    publicPath: '/test/manual/'
+    publicPath: '/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
