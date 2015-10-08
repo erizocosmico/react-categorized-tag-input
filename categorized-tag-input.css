@@ -16,6 +16,7 @@
   padding: .1em 24px .1em .1em;
   min-height: 38px;
   position: relative;
+  background: white;
 }
 
 .cti__input__arrow {
@@ -38,9 +39,9 @@
 
 .cti__input__input {
   max-width: 100%;
-  padding: .4em 0;
-  margin: .1em 0;
-  font-size: 1em;
+  padding: .4em 0 !important;
+  margin: .1em 0 !important;
+  font-size: 1em !important;
   border: none;
 }
 
@@ -86,6 +87,7 @@
   border: 1px solid rgb(220, 220, 220);
   border-top: none;
   width: 100%;
+  z-index: 9997;
 }
 
 

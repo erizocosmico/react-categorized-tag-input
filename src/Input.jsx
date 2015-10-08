@@ -12,7 +12,8 @@ const Input = React.createClass({
     onTagDeleted: PropTypes.func.isRequired,
     onKeyDown: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onBlur: PropTypes.func,
   },
 
   focusInput() {
@@ -34,13 +35,20 @@ const Input = React.createClass({
     });
   },
 
+  onBlur(e) {
+    this.props.closePanel();
+    if (typeof this.props.onBlur === 'function') {
+      this.props.onBlur(e);
+    }
+  },
+
   render() {
     return (
       <div className='cti__input' onClick={this.focusInput}>
         {this.getTags()}
         <input type='text' ref='input' value={this.props.value}
           size={this.props.value.length + 2}
-          onFocus={this.props.openPanel} onBlur={this.props.closePanel}
+          onFocus={this.props.openPanel} onBlur={this.onBlur}
           onChange={this.props.onValueChange} onKeyDown={this.props.onKeyDown}
           className='cti__input__input' />
         <div className='cti__input__arrow' />

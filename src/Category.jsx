@@ -17,7 +17,8 @@ const Category = React.createClass({
     input: PropTypes.string.isRequired,
     addNew: PropTypes.bool,
     type: PropTypes.string,
-    onAdd: PropTypes.func.isRequired
+    onAdd: PropTypes.func.isRequired,
+    single: PropTypes.bool
   },
 
   onAdd(item) {
@@ -45,7 +46,7 @@ const Category = React.createClass({
 
     let items = this.props.items.map((item, i) => {
       return (
-        <Tag selected={i === this.props.selectedItem && this.props.selected}
+        <Tag selected={this.isSelected(i)}
           input={this.props.input} text={item} addable={true} deletable={false}
           onAdd={this.onAdd(item)} key={item + '_' + i} />
       );
@@ -57,8 +58,13 @@ const Category = React.createClass({
     };
   },
 
+  isSelected(i) {
+    return this.props.selected &&
+      (i === this.props.selectedItem || this.props.single);
+  },
+
   getAddBtn(fullMatch, selected) {
-    if (this.props.addNew && !fullMatch) {
+    if (this.props.addNew && !fullMatch && !this.props.single) {
       return [
         this.props.items.length > 0 ?
           <span key='cat_or' className='cti__category__or'>or</span> :
@@ -74,6 +80,10 @@ const Category = React.createClass({
   },
 
   render() {
+    if (this.props.single && this.props.items.length === 0) {
+      return null;
+    }
+
     let { items, fullMatch } = this.getItems();
     let addBtn = this.getAddBtn(
       fullMatch,

@@ -12,7 +12,10 @@ const CategorizedTagInput = React.createClass({
   propTypes: {
     addNew: PropTypes.bool,
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-    transformTag: PropTypes.func
+    transformTag: PropTypes.func,
+    value: PropTypes.arrayOf(PropTypes.string),
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func
   },
 
   getInitialState() {
@@ -23,7 +26,7 @@ const CategorizedTagInput = React.createClass({
         category: 0
       },
       panelOpened: false,
-      tags: [],
+      tags: this.props.value || [],
       categories: [],
       addNew: this.props.addNew === undefined ? true : this.props.addNew
     };
@@ -81,6 +84,7 @@ const CategorizedTagInput = React.createClass({
     this.setState({
       tags: this.state.tags.slice(0, i).concat(this.state.tags.slice(i+1))
     });
+    this.props.onChange(this.state.tags);
   },
 
   onAdd(newTag) {
@@ -94,6 +98,7 @@ const CategorizedTagInput = React.createClass({
       panelOpened: true
     });
     this.refs.input.focusInput();
+    this.props.onChange(this.state.tags);
   },
 
   addSelectedTag() {
@@ -163,7 +168,7 @@ const CategorizedTagInput = React.createClass({
         <Input openPanel={this.openPanel} closePanel={this.closePanel}
           onValueChange={this.onValueChange} onTagDeleted={this.onTagDeleted}
           onKeyDown={this.onKeyDown} value={this.state.value}
-          tags={this.state.tags} ref='input' />
+          tags={this.state.tags} onBlur={this.props.onBlur} ref='input' />
         {this.state.panelOpened && this.state.value.length > 0 ? <Panel categories={this.state.categories}
           selection={this.state.selection} onAdd={this.onAdd}
           input={this.state.value}

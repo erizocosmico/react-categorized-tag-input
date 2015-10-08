@@ -10,6 +10,12 @@ const categories = [
     items: ['Dog', 'Cat', 'Bird', 'Dolphin', 'Apes']
   },
   {
+    id: 'something',
+    title: 'Something cool',
+    items: ['Something cool'],
+    single: true
+  },
+  {
     id: 'food',
     title: 'food',
     type: 'food',
@@ -30,7 +36,14 @@ function transformTag(category, item) {
 const props = {
   addNew: true,
   categories,
-  transformTag
+  transformTag,
+  value: ['initial'],
+  onChange(tags) {
+    console.log('Changed', tags);
+  },
+  onBlur() {
+    console.log('Blur')
+  }
 };
 
 React.render(
