@@ -10,12 +10,6 @@ const categories = [
     items: ['Dog', 'Cat', 'Bird', 'Dolphin', 'Apes']
   },
   {
-    id: 'something',
-    title: 'Something cool',
-    items: ['Something cool'],
-    single: true
-  },
-  {
     id: 'food',
     title: 'food',
     type: 'food',
@@ -29,24 +23,19 @@ const categories = [
   }
 ];
 
-function transformTag(category, item) {
-  return `${category}/${item}`;
-}
-
 const props = {
   addNew: true,
   categories,
-  transformTag,
-  value: ['initial'],
-  onChange(tags) {
-    console.log('Changed', tags);
-  },
-  onBlur() {
-    console.log('Blur')
-  }
+  onChange: () => {},
+  onBlur: () => {}
 };
 
 React.render(
   React.createElement(Input, props),
-  document.body
+  document.getElementById('wrap')
 );
+
+setTimeout(() => {
+  let elem = document.querySelector('.cti__input__input');
+  elem.focus();
+}, 1000);

@@ -1,0 +1,41 @@
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: white;
+}
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 300;
+  font-size: 3em;
+  margin-top: 3em;
+  color: #664FA7;
+}
+
+p {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 300;
+  color: #909090;
+}
+
+p.small {
+  width: 60%;
+  margin: 2em auto 0 auto;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 300;
+  color: #909090;
+}
+
+.cti__root {
+  margin: 3em auto 18em auto;
+}
