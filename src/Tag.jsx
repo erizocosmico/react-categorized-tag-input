@@ -52,13 +52,17 @@ const Tag = React.createClass({
     this.props.onDelete(e);
   },
 
+  getDeleteBtn() {
+    return (
+      <span className='cti__tag__delete' onClick={this.onDelete}
+        dangerouslySetInnerHTML={{ __html: '&times;' }} />
+    );
+  },
+
   render() {
     let deleteBtn = null;
     if (this.props.deletable) {
-      deleteBtn = (
-        <span className='cti__tag__delete' onClick={this.onDelete}
-          dangerouslySetInnerHTML={{ __html: '&times;' }} />
-      );
+      deleteBtn = this.getDeleteBtn();
     }
     let cls = 'cti__tag' + (this.props.selected ? ' cti-selected' : '');
 

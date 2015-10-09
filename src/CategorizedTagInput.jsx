@@ -6,7 +6,20 @@ import * as key from './keyboard';
 
 const { PropTypes } = React;
 
-// TODO: Validate categories on componentWillMount
+export function isCategoryItemValid(i) {
+  return typeof i === 'string' && i.trim().length > 0;
+}
+
+export function isCategoryValid(c) {
+  return typeof c === 'object'
+    && c.id
+    && c.title
+    && c.items
+    && Array.isArray(c.items)
+    && c.items.length > 0
+    && c.items.every(isCategoryItemValid)
+    && (c.type || c.single);
+}
 
 const CategorizedTagInput = React.createClass({
   propTypes: {
@@ -30,6 +43,12 @@ const CategorizedTagInput = React.createClass({
       categories: [],
       addNew: this.props.addNew === undefined ? true : this.props.addNew
     };
+  },
+
+  componentWillMount() {
+    if (!this.props.categories.every(isCategoryValid)) {
+      throw new Error('invalid categories source provided for react-categorized-tag-input');
+    }
   },
 
   filterCategories(input) {
@@ -69,6 +88,7 @@ const CategorizedTagInput = React.createClass({
   },
 
   closePanel() {
+    // Prevent the panel from hiding before the click action takes place
     setTimeout(() => {
       this.setState({ panelOpened: false });
     }, 150);
@@ -116,6 +136,47 @@ const CategorizedTagInput = React.createClass({
     });
   },
 
+  handleBackspace(e) {
+    if (this.state.value.trim().length === 0) {
+      e.preventDefault();
+      this.onTagDeleted(this.state.tags.length - 1);
+    }
+  },
+
+  handleArrowLeft() {
+    let result = this.state.selection.item - 1;
+    this.setState({selection: {
+      category: this.state.selection.category,
+      item: result >= 0 ? result : 0
+    }});
+  },
+
+  handleArrowUp() {
+    let result = this.state.selection.category - 1;
+    this.setState({selection: {
+      category: result >= 0 ? result : 0,
+      item: 0
+    }});
+  },
+
+  handleArrowRight() {
+    let result = this.state.selection.item + 1;
+    let cat = this.state.categories[this.state.selection.category];
+    this.setState({selection: {
+      category: this.state.selection.category,
+      item: result <= cat.items.length ? result : cat.items.length
+    }});
+  },
+
+  handleArrowDown() {
+    let result = this.state.selection.category + 1;
+    let cats = this.state.categories;
+    this.setState({selection: {
+      category: result < cats.length ? result : cats.length - 1,
+      item: 0
+    }});
+  },
+
   onKeyDown(e) {
     let result;
     switch (e.keyCode) {
@@ -126,40 +187,19 @@ const CategorizedTagInput = React.createClass({
       this.addSelectedTag();
       break;
     case key.BACKSPACE:
-      if (this.state.value.trim().length === 0) {
-        e.preventDefault();
-        this.onTagDeleted(this.state.tags.length - 1);
-      }
+      this.handleBackspace(e);
       break;
     case key.LEFT:
-      result = this.state.selection.item - 1;
-      this.setState({selection: {
-        category: this.state.selection.category,
-        item: result >= 0 ? result : 0
-      }});
+      this.handleArrowLeft();
       break;
     case key.UP:
-      result = this.state.selection.category - 1;
-      this.setState({selection: {
-        category: result >= 0 ? result : 0,
-        item: 0
-      }});
+      this.handleArrowUp();
       break;
     case key.RIGHT:
-      result = this.state.selection.item + 1;
-      let cat = this.state.categories[this.state.selection.category];
-      this.setState({selection: {
-        category: this.state.selection.category,
-        item: result <= cat.items.length ? result : cat.items.length
-      }});
+      this.handleArrowRight();
       break;
     case key.DOWN:
-      result = this.state.selection.category + 1;
-      let cats = this.state.categories;
-      this.setState({selection: {
-        category: result < cats.length ? result : cats.length - 1,
-        item: 0
-      }});
+      this.handleArrowDown();
       break;
     }
   },

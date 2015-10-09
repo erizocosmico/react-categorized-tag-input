@@ -35,26 +35,27 @@ const Category = React.createClass({
     this.onAdd(this.props.input)();
   },
 
-  getItems() {
-    let fullMatch = false;
+  itemToTag(item, i) {
+    return (
+      <Tag selected={this.isSelected(i)}
+        input={this.props.input} text={item} addable={true} deletable={false}
+        onAdd={this.onAdd(item)} key={item + '_' + i} />
+    );
+  },
+
+  fullMatchInItems() {
     for (let i = 0, len = this.props.items.length; i < len; i++) {
       if (this.props.items[i] === this.props.input) {
-        fullMatch = true;
-        break;
+        return true;
       }
     }
+    return false;
+  },
 
-    let items = this.props.items.map((item, i) => {
-      return (
-        <Tag selected={this.isSelected(i)}
-          input={this.props.input} text={item} addable={true} deletable={false}
-          onAdd={this.onAdd(item)} key={item + '_' + i} />
-      );
-    });
-
+  getItems() {
     return {
-      items,
-      fullMatch
+      items: this.props.items.map(this.itemToTag),
+      fullMatch: this.fullMatchInItems(),
     };
   },
 
