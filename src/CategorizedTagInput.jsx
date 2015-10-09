@@ -107,7 +107,9 @@ const CategorizedTagInput = React.createClass({
       tags: newTags
     });
 
-    this.props.onChange(newTags);
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(newTags);
+    }
   },
 
   onAdd(newTag) {
@@ -124,7 +126,9 @@ const CategorizedTagInput = React.createClass({
     });
 
     this.refs.input.focusInput();
-    this.props.onChange(newTags);
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(newTags);
+    }
   },
 
   addSelectedTag() {
