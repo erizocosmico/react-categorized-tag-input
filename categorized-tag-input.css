@@ -40,7 +40,7 @@
 .cti__input__input {
   max-width: 100%;
   padding: .4em 0 !important;
-  margin: .1em 0 !important;
+  margin: .1em 0 .1em .4em !important;
   font-size: 1em !important;
   border: none;
 }
@@ -52,7 +52,7 @@
   padding: .3em .7em;
   color: rgb(146, 146, 146);
   display: inline-block;
-  margin: .1em .4em;
+  margin: .1em  0 .1em .4em;
   cursor: pointer;
   word-break: break-all;
   max-width: 100%;
@@ -90,12 +90,19 @@
   z-index: 9997;
 }
 
-
 .cti__category__add-item {
   background: transparent;
   border: none;
   color: rgb(28, 99, 166);
   font-size: 1em;
+}
+
+.cti__category__add-item.cti-selected {
+  margin-left: .4em;
+}
+
+.cti__category__or {
+  margin-left: .4em;
 }
 
 .cti-selected {
