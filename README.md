@@ -72,6 +72,5 @@ When you click on the input you will be able to write on it. Right away, a panel
 
 * More complete test suite
 * Setup test coverage
-* Setup component demo page
 
 Will it have async options and AJAX loaded options? Not for now. You are welcome to implement it and contribute to it, though.
