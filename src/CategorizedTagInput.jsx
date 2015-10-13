@@ -16,7 +16,6 @@ export function isCategoryValid(c) {
     && c.title
     && c.items
     && Array.isArray(c.items)
-    && c.items.length > 0
     && c.items.every(isCategoryItemValid)
     && (c.type || c.single);
 }
