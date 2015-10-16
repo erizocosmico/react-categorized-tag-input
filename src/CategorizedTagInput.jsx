@@ -95,7 +95,7 @@ const CategorizedTagInput = React.createClass({
 
   onValueChange(e) {
     let value = e.target.value;
-    this.setState({ value, panelOpened: value.trim().length > 0 });
+    this.setState({ value, panelOpened: value.trim().length > 1 });
     this.filterCategories(value);
   },
 
