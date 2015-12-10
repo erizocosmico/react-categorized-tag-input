@@ -78,6 +78,9 @@ const CategorizedTagInput = React.createClass({
 
   filterItems(input) {
     return function (i) {
+      if (input.length === 1) {
+        return i.toLowerCase().trim() === input;
+      }
       return i.toLowerCase().indexOf(input.trim().toLowerCase()) >= 0;
     };
   },
@@ -95,7 +98,7 @@ const CategorizedTagInput = React.createClass({
 
   onValueChange(e) {
     let value = e.target.value;
-    this.setState({ value, panelOpened: value.trim().length > 1 || !isNaN(Number(value.trim())) });
+    this.setState({ value, panelOpened: value.trim().length > 0 || !isNaN(Number(value.trim())) });
     this.filterCategories(value);
   },
 
