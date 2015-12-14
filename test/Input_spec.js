@@ -1,10 +1,10 @@
 import expect from 'expect';
-import React from 'react/addons';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import jsdomReact from './jsdomReact';
 
 import Input from '../src/Input.jsx';
 
-const { TestUtils } = React.addons;
 
 function createInput(props) {
   return TestUtils.renderIntoDocument(React.createElement(Input, props));
@@ -42,6 +42,6 @@ describe('Input', () => {
     expect(tags.length).toBe(2);
 
     let input = findInput(i);
-    expect(input.getDOMNode().value).toBe(props().value)
+    expect(input.value).toBe(props().value)
   });
 });

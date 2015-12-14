@@ -1,10 +1,10 @@
 import expect from 'expect';
-import React from 'react/addons';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import jsdomReact from './jsdomReact';
 
 import Panel from '../src/Panel.jsx';
 
-const { TestUtils } = React.addons;
 
 function panel(props) {
   return TestUtils.renderIntoDocument(React.createElement(Panel, props));
@@ -49,6 +49,6 @@ describe('Panel', () => {
     let p = panel(props());
     let selected = TestUtils.scryRenderedDOMComponentsWithClass(p, 'cti-selected');
     expect(selected.length).toBe(1);
-    expect(selected[0].getDOMNode().textContent).toBe('Create new reversed thing "ra"');
+    expect(selected[0].textContent).toBe('Create new reversed thing "ra"');
   });
 });

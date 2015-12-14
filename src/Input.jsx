@@ -17,11 +17,11 @@ const Input = React.createClass({
   },
 
   focusInput() {
-    this.refs.input.getDOMNode().focus();
+    this.refs.input.focus();
   },
 
   resizeInput() {
-    let node = this.refs.input.getDOMNode();
+    let node = this.refs.input;
     node.style.width = (node.scrollWidth + 8) + 'px';
   },
 
