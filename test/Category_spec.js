@@ -1,10 +1,10 @@
 import expect from 'expect';
-import React from 'react/addons';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import jsdomReact from './jsdomReact';
 
 import Category from '../src/Category.jsx';
 
-const { TestUtils } = React.addons;
 
 function category(props) {
   return TestUtils.renderIntoDocument(React.createElement(Category, props));
@@ -41,7 +41,7 @@ describe('Category', () => {
       let btn = findAddBtn(c);
 
       expect(btn).toNotBe(undefined);
-      expect(btn.getDOMNode().innerHTML).toBe('Create new thing "fo"');
+      expect(btn.innerHTML).toBe('Create new thing "fo"');
     });
 
     describe('and is a full match', () => {
@@ -67,14 +67,14 @@ describe('Category', () => {
     let c = category(props());
     let tags = findTags(c);
     expect(tags.length).toBe(2);
-    expect(tags[0].getDOMNode().textContent).toBe('foo');
-    expect(tags[1].getDOMNode().textContent).toBe('foobarbaz');
+    expect(tags[0].textContent).toBe('foo');
+    expect(tags[1].textContent).toBe('foobarbaz');
 
     c = category(props({ input: 'bar', items: ['bar', 'foobarbaz'] }));
     tags = findTags(c);
     expect(tags.length).toBe(2);
-    expect(tags[0].getDOMNode().textContent).toBe('bar');
-    expect(tags[1].getDOMNode().textContent).toBe('foobarbaz');
+    expect(tags[0].textContent).toBe('bar');
+    expect(tags[1].textContent).toBe('foobarbaz');
 
     c = category(props({ input: 'ksajdfhskjf', items: [] }));
     tags = findTags(c);
@@ -88,7 +88,7 @@ describe('Category', () => {
         expect(findTags(c).length).toBe(0);
         let btn = findAddBtn(c);
         expect(btn).toNotBe(undefined);
-        expect(btn.getDOMNode().innerHTML).toBe('Create new thing "asd"');
+        expect(btn.innerHTML).toBe('Create new thing "asd"');
       });
     });
   });
@@ -103,13 +103,13 @@ describe('Category', () => {
         }
       }));
       let tags = findTags(c);
-      TestUtils.Simulate.click(tags[0].getDOMNode());
+      TestUtils.Simulate.click(tags[0]);
     });
   });
 
   describe('when category is selected', () => {
     function isSelected(elem) {
-      return elem.getDOMNode().className.split(' ')[1] === 'cti-selected';
+      return elem.className.split(' ')[1] === 'cti-selected';
     }
 
     describe('and an item is selected', () => {

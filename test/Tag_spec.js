@@ -1,10 +1,10 @@
 import expect from 'expect';
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import jsdomReact from './jsdomReact';
 
 import Tag from '../src/Tag.jsx';
-
-const { TestUtils } = React.addons;
 
 function tag(props) {
   return TestUtils.renderIntoDocument(React.createElement(Tag, props));
@@ -49,7 +49,7 @@ describe('Tag', () => {
 
       let spans = findContentSpans(t);
       expect(spans.length).toBe(3);
-      expect(spans[0].props.className).toBe('cti__tag__content--regular');
+      expect(spans[0].className).toBe('cti__tag__content--regular');
       expect(spans[0].props.children).toBe('fo');
       expect(spans[1].props.className).toBe('cti__tag__content--match');
       expect(spans[1].props.children).toBe('oab');
@@ -84,7 +84,7 @@ describe('Tag', () => {
         }
       }));
 
-      TestUtils.Simulate.click(t.getDOMNode());
+      TestUtils.Simulate.click(ReactDOM.findDOMNode(t));
 
       setImmediate(() => {
         expect(added).toBe(true);
@@ -96,7 +96,7 @@ describe('Tag', () => {
   describe('if the tag is deletable', () => {
     function findDelete(t) {
       return TestUtils.findRenderedDOMComponentWithClass(t, 'cti__tag__delete')
-        .getDOMNode();
+        ;
     }
 
     it('should trigger onDelete callback', done => {
@@ -148,7 +148,7 @@ describe('Tag', () => {
         selected: true
       }));
 
-      expect(t.getDOMNode().className.split(' ')[1]).toBe('cti-selected');
+      expect(ReactDOM.findDOMNode(t).className.split(' ')[1]).toBe('cti-selected');
     });
   });
 });
