@@ -1,6 +1,8 @@
 # react-categorized-tag-input [![Build Status](https://travis-ci.org/mvader/react-categorized-tag-input.svg)](https://travis-ci.org/mvader/react-categorized-tag-input)
 React.js component for making tag autocompletion inputs with categorized results with no dependencies and 10KB minified.
 
+**Note:** v1.x versions only work with react 0.14.0 or higher. For compatibility with previous versions use the v0.x versions.
+
 ## Install
 
 ```
