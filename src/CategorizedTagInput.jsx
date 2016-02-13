@@ -41,8 +41,7 @@ const CategorizedTagInput = React.createClass({
       panelOpened: false,
       tags: this.props.value || [],
       categories: [],
-      addNew: this.props.addNew === undefined ? true : this.props.addNew,
-      placeholder: "Add a tag"
+      addNew: this.props.addNew === undefined ? true : this.props.addNew
     };
   },
 

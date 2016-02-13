@@ -13,17 +13,12 @@ const Input = React.createClass({
     onKeyDown: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    placeholder: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
     onBlur: PropTypes.func
   },
 
   focusInput() {
     this.refs.input.focus();
-  },
-
-  resizeInput() {
-    let node = this.refs.input;
-    node.style.width = (node.scrollWidth + 8) + 'px';
   },
 
   getTags() {
@@ -44,11 +39,14 @@ const Input = React.createClass({
   },
 
   render() {
+    let size = this.props.value.length === 0 ?
+      this.props.placeholder.length :
+      this.props.value.length;
     return (
       <div className='cti__input' onClick={this.focusInput}>
         {this.getTags()}
         <input type='text' ref='input' value={this.props.value}
-          size={this.props.value.length + 2}
+          size={size + 2}
           onFocus={this.props.openPanel} onBlur={this.onBlur}
           onChange={this.props.onValueChange} onKeyDown={this.props.onKeyDown}
           placeholder={this.props.placeholder} aria-label={this.props.placeholder}
