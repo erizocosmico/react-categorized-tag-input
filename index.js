@@ -38,6 +38,7 @@ const props = {
   categories,
   transformTag,
   value: ['initial'],
+  placeholder: "Add a tag",
   onChange(tags) {
     console.log('Changed', tags);
   },

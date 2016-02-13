@@ -13,7 +13,8 @@ const Input = React.createClass({
     onKeyDown: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onBlur: PropTypes.func,
+    placeholder: PropTypes.string.isRequired,
+    onBlur: PropTypes.func
   },
 
   focusInput() {
@@ -50,6 +51,7 @@ const Input = React.createClass({
           size={this.props.value.length + 2}
           onFocus={this.props.openPanel} onBlur={this.onBlur}
           onChange={this.props.onValueChange} onKeyDown={this.props.onKeyDown}
+          placeholder={this.props.placeholder} aria-label={this.props.placeholder}
           className='cti__input__input' />
         <div className='cti__input__arrow' />
       </div>

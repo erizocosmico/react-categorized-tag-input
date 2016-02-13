@@ -40,6 +40,7 @@ The props are very straightforward.
 |value|Array of strings|Array with the initial tags|[]|
 |onBlur|function|Callback for when the input loses focus|noop|
 |onChange|function|Callback for when the input changes. It does not get an event as parameter, it gets the array of tags after the change.|noop|
+|placeholder|string|A placeholder will be given in the input box.|Add a tag|
 
 #### The category object
 The category object for the dataset looks like this:

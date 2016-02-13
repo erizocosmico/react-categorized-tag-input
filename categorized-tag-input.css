@@ -38,7 +38,7 @@
 }
 
 .cti__input__input {
-  max-width: 100%;
+  width: 25%;
   padding: .4em 0 !important;
   margin: .1em 0 .1em .4em !important;
   font-size: 1em !important;
