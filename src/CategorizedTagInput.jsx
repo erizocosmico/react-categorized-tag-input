@@ -135,6 +135,10 @@ const CategorizedTagInput = React.createClass({
   },
 
   addSelectedTag() {
+    if (!(this.state.panelOpened && this.state.value.length > 0)) {
+      return;
+    }
+
     let category = this.state.categories[this.state.selection.category];
     let item = category.items[this.state.selection.item];
     this.onAdd({
