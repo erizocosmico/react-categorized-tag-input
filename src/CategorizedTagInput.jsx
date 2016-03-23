@@ -51,6 +51,12 @@ const CategorizedTagInput = React.createClass({
     }
   },
 
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+  },
+
   filterCategories(input) {
     let categories = this.props.categories.map(c => {
       c = Object.assign({}, c, {
@@ -92,7 +98,8 @@ const CategorizedTagInput = React.createClass({
 
   closePanel() {
     // Prevent the panel from hiding before the click action takes place
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
+      this.timeout = undefined;
       this.setState({ panelOpened: false });
     }, 150);
   },
