@@ -98,6 +98,9 @@ const CategorizedTagInput = React.createClass({
 
   closePanel() {
     // Prevent the panel from hiding before the click action takes place
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
     this.timeout = setTimeout(() => {
       this.timeout = undefined;
       this.setState({ panelOpened: false });
