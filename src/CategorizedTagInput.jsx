@@ -28,7 +28,8 @@ const CategorizedTagInput = React.createClass({
     value: PropTypes.arrayOf(PropTypes.string),
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    getTagStyle: PropTypes.func
   },
 
   getInitialState() {
@@ -235,6 +236,7 @@ const CategorizedTagInput = React.createClass({
         <Input openPanel={this.openPanel} closePanel={this.closePanel}
           onValueChange={this.onValueChange} onTagDeleted={this.onTagDeleted}
           onKeyDown={this.onKeyDown} placeholder={this.props.placeholder} value={this.state.value}
+          getTagStyle={this.props.getTagStyle}
           tags={this.state.tags} onBlur={this.props.onBlur} ref='input' />
         {this.state.panelOpened && this.state.value.length > 0 ? <Panel categories={this.state.categories}
           selection={this.state.selection} onAdd={this.onAdd}
