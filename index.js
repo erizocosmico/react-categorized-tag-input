@@ -45,6 +45,17 @@ const props = {
   },
   onBlur() {
     console.log('Blur');
+  },
+  getTagStyle(text){
+    if (text === "initial") {
+      return {
+        base: {
+          backgroundColor: "gray",
+          color: "lightgray"
+        }
+      }
+    }
+    return {}
   }
 };
 

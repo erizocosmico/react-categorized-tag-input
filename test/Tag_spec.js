@@ -151,4 +151,28 @@ describe('Tag', () => {
       expect(ReactDOM.findDOMNode(t).className.split(' ')[1]).toBe('cti-selected');
     });
   });
+
+  describe('when a getTagStyle func is provided', () => {
+    it('should apply the correct styles', () => {
+      const style = {
+        base: {
+          color: "red"
+        },
+        content: {
+          color: "green"
+        },
+        "delete": {
+          color: "blue"
+        }
+      }
+      
+      const t = tag(props({
+        style
+      }))
+
+      const domNode = ReactDOM.findDOMNode(t)
+      expect(domNode.style.color).toBe("red")
+
+    })
+  })
 });

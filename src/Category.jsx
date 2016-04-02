@@ -18,7 +18,8 @@ const Category = React.createClass({
     addNew: PropTypes.bool,
     type: PropTypes.string,
     onAdd: PropTypes.func.isRequired,
-    single: PropTypes.bool
+    single: PropTypes.bool,
+    getTagStyle: PropTypes.func
   },
 
   onAdd(item) {
@@ -35,11 +36,15 @@ const Category = React.createClass({
     this.onAdd(this.props.input)();
   },
 
+  getTagStyle(item) {
+    return this.props.getTagStyle ? this.props.getTagStyle(item) : {}
+  },
+
   itemToTag(item, i) {
     return (
       <Tag selected={this.isSelected(i)}
         input={this.props.input} text={item} addable={true} deletable={false}
-        onAdd={this.onAdd(item)} key={item + '_' + i} />
+        onAdd={this.onAdd(item)} key={item + '_' + i} style={this.getTagStyle(item)} />
     );
   },
 

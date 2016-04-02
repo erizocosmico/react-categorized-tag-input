@@ -41,6 +41,7 @@ The props are very straightforward.
 |onBlur|function|Callback for when the input loses focus|noop|
 |onChange|function|Callback for when the input changes. It does not get an event as parameter, it gets the array of tags after the change.|noop|
 |placeholder|string|A placeholder will be given in the input box.|Add a tag|
+|getTagStyle|function| A function from the tag text (string) to an object with any or all of the following keys: `base`, `content` and `delete`. The values are React style objects. This example renders 1-letter long tags in red: `text => text.length === 1 ? {base: {color: "red"}} : {}` | () => ({}) |
 
 #### The category object
 The category object for the dataset looks like this:

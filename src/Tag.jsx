@@ -10,7 +10,8 @@ const Tag = React.createClass({
     addable: PropTypes.bool,
     deletable: PropTypes.bool,
     onAdd: PropTypes.func,
-    onDelete: PropTypes.func
+    onDelete: PropTypes.func,
+    style: PropTypes.object
   },
 
   tagContent() {
@@ -53,9 +54,13 @@ const Tag = React.createClass({
   },
 
   getDeleteBtn() {
+    const style = this.props.style || {}
+    const deleteStyle = style.delete ? style.delete : {}
+
     return (
       <span className='cti__tag__delete' onClick={this.onDelete}
-        dangerouslySetInnerHTML={{ __html: '&times;' }} />
+        dangerouslySetInnerHTML={{ __html: '&times;' }}
+        style={deleteStyle}/>
     );
   },
 
@@ -66,9 +71,11 @@ const Tag = React.createClass({
     }
     let cls = 'cti__tag' + (this.props.selected ? ' cti-selected' : '');
 
+    const style = this.props.style || {}
+
     return (
-      <div className={cls} onClick={this.onClick}>
-        <div className='cti__tag__content'>
+      <div className={cls} onClick={this.onClick} style={style.base || {}} >
+        <div className='cti__tag__content' style={style.content || {}}>
           {this.tagContent()}
         </div>
         {deleteBtn}
