@@ -203,6 +203,11 @@ const CategorizedTagInput = React.createClass({
     switch (e.keyCode) {
     case key.TAB:
     case key.ENTER:
+      if (!this.state.value){
+        // enable normal tab/enter behavior
+        // (don't preventDefault)
+        break;
+      }
     case key.COMMA:
       e.preventDefault();
       this.addSelectedTag();
