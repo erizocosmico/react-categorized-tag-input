@@ -56,6 +56,9 @@ const props = {
       }
     }
     return {}
+  },
+  getCreateNewText(title, text){
+    return `create new ${title} "${text}"`
   }
 };
 

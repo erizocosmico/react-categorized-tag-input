@@ -11,7 +11,8 @@ const Panel = React.createClass({
     onAdd: PropTypes.func.isRequired,
     input: PropTypes.string.isRequired,
     addNew: PropTypes.bool,
-    getTagStyle: PropTypes.func
+    getTagStyle: PropTypes.func,
+    getCreateNewText: PropTypes.func
   },
 
   getCategories() {
@@ -22,7 +23,8 @@ const Panel = React.createClass({
           selectedItem={this.props.selection.item}
           input={this.props.input} addNew={this.props.addNew}
           type={c.type} onAdd={this.props.onAdd} single={c.single}
-          getTagStyle={this.props.getTagStyle} />
+          getTagStyle={this.props.getTagStyle}
+          getCreateNewText={this.props.getCreateNewText} />
       );
     });
   },

@@ -4,6 +4,8 @@ import Tag from './Tag.jsx';
 
 const { PropTypes } = React;
 
+const getCreateNewText = (title, text) => `Create new ${title} "${text}"`
+
 const Category = React.createClass({
   propTypes: {
     items: PropTypes.array.isRequired,
@@ -19,7 +21,8 @@ const Category = React.createClass({
     type: PropTypes.string,
     onAdd: PropTypes.func.isRequired,
     single: PropTypes.bool,
-    getTagStyle: PropTypes.func
+    getTagStyle: PropTypes.func,
+    getCreateNewText: PropTypes.func
   },
 
   onAdd(item) {
@@ -70,15 +73,19 @@ const Category = React.createClass({
   },
 
   getAddBtn(fullMatch, selected) {
+    const title = this.props.type || this.props.title;
+    const text = this.props.input;
+    const getText = this.props.getCreateNewText || getCreateNewText;
     if (this.props.addNew && !fullMatch && !this.props.single) {
       return [
         this.props.items.length > 0 ?
           <span key='cat_or' className='cti__category__or'>or</span> :
           null,
-        <button key='add_btn' className={'cti__category__add-item' + (selected ? ' cti-selected' : '')}
-          onClick={this.onCreateNew}>
-          {'Create new ' + (this.props.type || this.props.title) + ` "${this.props.input}"`}
-        </button>
+        <button
+          key='add_btn'
+          className={'cti__category__add-item' + (selected ? ' cti-selected' : '')}
+          onClick={this.onCreateNew}
+          >{getText(title, text)}</button>
       ];
     }
 
