@@ -90,6 +90,14 @@ describe('Category', () => {
         expect(btn).toNotBe(undefined);
         expect(btn.innerHTML).toBe('Create new thing "asd"');
       });
+      it('should generate a message using getCreateNewText if provided', () => {
+        const getCreateNewText = (title, text) => `Hacer nuevo ${title} "${text}"`
+        const c = category(props({ input: 'asd', items: [], getCreateNewText}));
+        expect(findTags(c).length).toBe(0);
+        const btn = findAddBtn(c);
+        expect(btn).toNotBe(undefined);
+        expect(btn.innerHTML).toBe('Hacer nuevo thing "asd"');
+      });
     });
   });
 
