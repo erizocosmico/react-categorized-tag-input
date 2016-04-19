@@ -14,6 +14,13 @@ const Tag = React.createClass({
     style: PropTypes.object
   },
 
+  // helps tests pass
+  getDefaultProps() {
+      return {
+          text: ''  
+      };
+  },
+
   tagContent() {
     let content = [];
     let startIndex = this.props.text.trim().toLowerCase()

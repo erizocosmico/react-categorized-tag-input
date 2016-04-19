@@ -36,13 +36,27 @@ The props are very straightforward.
 |-----|------|-------------|--------|
 |addNew|boolean|If true, allows the user to create new tags that are not set in the dataset|true|
 |categories|Array of objects|Dataset with categories and items|Required|
-|transformTag|function|A function that will receive the category id and the selected item and must return a string. This string will be the resultant string. Useful if you need to apply a transformation to the tags.|item is resulting tag|
-|value|Array of strings|Array with the initial tags|[]|
+|transformTag|function|A function that will receive the tag object (which has at least keys `title` and `category`) and must return a string. This string will be displayed to the user. Useful if you need to apply a transformation to the tags.|(tag) => tag.title|
+|value|Array of tags. Tags are objects with (at least) keys `title` and `category`, where `category` is the id of a category in the array passed in for the `categories` prop|Array with the initial tags|[]|
 |onBlur|function|Callback for when the input loses focus|noop|
 |onChange|function|Callback for when the input changes. It does not get an event as parameter, it gets the array of tags after the change.|noop|
 |placeholder|string|A placeholder will be given in the input box.|Add a tag|
+<<<<<<< 22655e46e0cf6c9a5da5a9ed5322e8dc95a90169
 |getTagStyle|function| A function from the tag text (string) to an object with any or all of the following keys: `base`, `content` and `delete`. The values are React style objects. This example renders 1-letter long tags in red: `text => text.length === 1 ? {base: {color: "red"}} : {}` | () => ({}) |
 |getCreateNewText|function| A function that returns the text to display when the user types an unrecognized tag, given a title and text.| (title, text) => `Create new ${title} "${text}"` |
+=======
+|getTagStyle|function| A function from the tag (object with at least the keys `title` and `category`) to an object with any or all of the following keys: `base`, `content` and `delete`. The values are React style objects. This example renders 1-letter long tags in red: `text => text.length === 1 ? {base: {color: "red"}} : {}` | () => ({}) |
+
+#### The tag object
+Tag objects look like this:
+```
+{
+	title: 'String to used to identify the tag',
+	category: 'id of the category for the tag'
+
+}
+```
+>>>>>>> Make `TagInput` a controlled component. Fixes #11
 
 #### The category object
 The category object for the dataset looks like this:

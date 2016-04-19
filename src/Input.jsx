@@ -12,26 +12,37 @@ const Input = React.createClass({
     onTagDeleted: PropTypes.func.isRequired,
     onKeyDown: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.object).isRequired,
     placeholder: PropTypes.string,
     onBlur: PropTypes.func,
-    getTagStyle: PropTypes.func
+    getTagStyle: PropTypes.func,
+    transformTag: PropTypes.func
   },
 
   focusInput() {
     this.refs.input.focus();
   },
 
+  getDefaultProps() {
+      return {
+          getTagStyle(tag) {
+            // empty style object by default
+            return {};
+          },
+          transformTag(tag){
+            return tag.title;
+          }
+      };
+  },
+
   getTags() {
 
-    const getTagStyle = this.props.getTagStyle || () => {}
-
-    return this.props.tags.map((t, i) => {
+    return this.props.tags.map((tag, i) => {
       return (
-        <Tag selected={false} input='' text={t} addable={false}
-          deletable={true} key={t + '_' + i}
+        <Tag selected={false} input='' text={this.props.transformTag(tag)} addable={false}
+          deletable={true} key={tag.title + '_' + i}
           onDelete={() => this.props.onTagDeleted(i)} 
-          style={getTagStyle(t)}/>
+          style={this.props.getTagStyle(tag)}/>
       );
     });
   },
