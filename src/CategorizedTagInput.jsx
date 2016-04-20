@@ -25,7 +25,7 @@ const CategorizedTagInput = React.createClass({
     addNew: PropTypes.bool,
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
     transformTag: PropTypes.func,
-    value: PropTypes.arrayOf(PropTypes.string),
+    value: PropTypes.arrayOf(PropTypes.object),
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
@@ -41,10 +41,17 @@ const CategorizedTagInput = React.createClass({
         category: 0
       },
       panelOpened: false,
-      tags: this.props.value || [],
       categories: [],
       addNew: this.props.addNew === undefined ? true : this.props.addNew
     };
+  },
+
+  getDefaultProps() {
+      return {
+          onChange(newTags){
+            // do nothing
+          }
+      };
   },
 
   componentWillMount() {
@@ -116,34 +123,20 @@ const CategorizedTagInput = React.createClass({
   },
 
   onTagDeleted(i) {
-    let newTags = this.state.tags.slice(0, i)
-      .concat(this.state.tags.slice(i+1));
-    this.setState({
-      tags: newTags
-    });
-
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(newTags);
-    }
+    const newTags = this.props.value.slice()
+    newTags.splice(i, 1)
+    this.props.onChange(newTags)
   },
 
-  onAdd(newTag) {
-    let { category, item } = newTag;
-    if (typeof this.props.transformTag === 'function') {
-      item = this.props.transformTag(category, item);
-    }
-
-    let newTags = this.state.tags.concat([item]);
+  onAdd(newTag) {  
+    const newTags = this.props.value.concat([newTag]);
     this.setState({
-      tags: newTags,
       value: '',
       panelOpened: true
     });
 
     this.refs.input.focusInput();
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(newTags);
-    }
+    this.props.onChange(newTags);
   },
 
   addSelectedTag() {
@@ -151,18 +144,18 @@ const CategorizedTagInput = React.createClass({
       return;
     }
 
-    let category = this.state.categories[this.state.selection.category];
-    let item = category.items[this.state.selection.item];
+    const category = this.state.categories[this.state.selection.category];
+    const title = category.items[this.state.selection.item];
     this.onAdd({
       category: category.id,
-      item: item || this.state.value
+      title: title || this.state.value
     });
   },
 
   handleBackspace(e) {
     if (this.state.value.trim().length === 0) {
       e.preventDefault();
-      this.onTagDeleted(this.state.tags.length - 1);
+      this.onTagDeleted(this.props.value.length - 1);
     }
   },
 
@@ -232,10 +225,6 @@ const CategorizedTagInput = React.createClass({
     }
   },
 
-  value() {
-    return this.state.tags;
-  },
-
   render() {
     return (
       <div className='cti__root'>
@@ -243,7 +232,9 @@ const CategorizedTagInput = React.createClass({
           onValueChange={this.onValueChange} onTagDeleted={this.onTagDeleted}
           onKeyDown={this.onKeyDown} placeholder={this.props.placeholder} value={this.state.value}
           getTagStyle={this.props.getTagStyle}
-          tags={this.state.tags} onBlur={this.props.onBlur} ref='input' />
+          tags={this.props.value}
+          transformTag={this.props.transformTag}
+          onBlur={this.props.onBlur} ref='input' />
         {this.state.panelOpened && this.state.value.length > 0 ? <Panel categories={this.state.categories}
           selection={this.state.selection} onAdd={this.onAdd}
           input={this.state.value}

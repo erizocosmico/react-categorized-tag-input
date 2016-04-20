@@ -30,42 +30,37 @@ const categories = [
   }
 ];
 
-function transformTag(category, item) {
-  return `${category}/${item}`;
+function transformTag(tag) {
+  const categoryMatches = categories.filter(category => category.id === tag.category);
+  const categoryTitle = categoryMatches[0].title;
+  return `${categoryTitle}/${tag.title}`;
 }
 
-const props = {
-  addNew: true,
-  categories,
-  transformTag,
-  value: ['initial'],
-  placeholder: "Add a tag",
-  onChange(tags) {
-    console.log('Changed', tags);
-  },
-  onBlur() {
-    console.log('Blur');
-  },
-  getTagStyle(text){
-    if (text === "initial") {
-      return {
-        base: {
-          backgroundColor: "gray",
-          color: "lightgray"
-        }
+
+function getTagStyle(tag){
+  if (tag.title === "rhino") {
+    return {
+      base: {
+        backgroundColor: "gray",
+        color: "lightgray"
       }
     }
     return {}
-  },
-  getCreateNewText(title, text){
-    return `create new ${title} "${text}"`
   }
-};
+}
+
+function getCreateNewText(title, text){
+  return `create new ${title} "${text}"`
+}
 
 const Wrap = React.createClass({
   getInitialState() {
     return {
-      editable: true
+      editable: true,
+      tags: [{
+        title: "rhino",
+        category: 'animals'
+      }]
     };
   },
 
@@ -79,7 +74,24 @@ const Wrap = React.createClass({
     return (
       <div>
         <button onClick={this.toggleEdit}>Toggle edit</button>
-        {this.state.editable ? <Input {...props} /> : <span>Not editable</span>}
+        {this.state.editable
+                      ? <Input
+                          addNew={true}
+                          categories={categories}
+                          getTagStyle={getTagStyle}
+                          value={this.state.tags}
+                          placeholder="Add a tag"
+                          onChange={(tags) => {
+                            console.log('Changed', tags);
+                            this.setState({tags});
+                          }}
+                          onBlur={() => {
+                            console.log('Blur');
+                          }}
+                          transformTag={transformTag}
+                          getCreateNewText={getCreateNewText}
+                        /> 
+                      : <span>Not editable</span>}
       </div>
     );
   }
