@@ -27,7 +27,7 @@ If you want to use the default style you have to include the `categorized-tag-in
 
 As a personal suggestion, I recommend webpack. You would just need to `require('node_modules/react-categorized-tag-input/categorized-tag-input.css');`.
 
-## Usage
+## Usage
 
 To use this component we will assume the imported variable name is `TagInput`.
 The props are very straightforward.
@@ -41,22 +41,19 @@ The props are very straightforward.
 |onBlur|function|Callback for when the input loses focus|noop|
 |onChange|function|Callback for when the input changes. It does not get an event as parameter, it gets the array of tags after the change.|noop|
 |placeholder|string|A placeholder will be given in the input box.|Add a tag|
-<<<<<<< 22655e46e0cf6c9a5da5a9ed5322e8dc95a90169
 |getTagStyle|function| A function from the tag text (string) to an object with any or all of the following keys: `base`, `content` and `delete`. The values are React style objects. This example renders 1-letter long tags in red: `text => text.length === 1 ? {base: {color: "red"}} : {}` | () => ({}) |
 |getCreateNewText|function| A function that returns the text to display when the user types an unrecognized tag, given a title and text.| (title, text) => `Create new ${title} "${text}"` |
-=======
 |getTagStyle|function| A function from the tag (object with at least the keys `title` and `category`) to an object with any or all of the following keys: `base`, `content` and `delete`. The values are React style objects. This example renders 1-letter long tags in red: `text => text.length === 1 ? {base: {color: "red"}} : {}` | () => ({}) |
 
 #### The tag object
 Tag objects look like this:
 ```
 {
-	title: 'String to used to identify the tag',
-	category: 'id of the category for the tag'
+  title: 'String to used to identify the tag',
+  category: 'id of the category for the tag'
 
 }
 ```
->>>>>>> Make `TagInput` a controlled component. Fixes #11
 
 #### The category object
 The category object for the dataset looks like this:
@@ -87,7 +84,7 @@ You can either use the `onChange` callback or use the `value()` method of the co
 
 When you click on the input you will be able to write on it. Right away, a panel with the categories with matches will be shown. You can navigate through categories and options using the arrow keys to change the selected tag. Backspace when there is nothing written erases the last tag. Enter and `,` add the currently selected tag to the input.
 
-## TODO
+## TODO
 
 * More complete test suite
 * Setup test coverage
