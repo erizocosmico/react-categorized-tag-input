@@ -67,10 +67,3 @@ You can either use the `onChange` callback or use the `value()` method of the co
 ### How to use the rendered component
 
 When you click on the input you will be able to write on it. Right away, a panel with the categories with matches will be shown. You can navigate through categories and options using the arrow keys to change the selected tag. Backspace when there is nothing written erases the last tag. Enter and `,` add the currently selected tag to the input.
-
-## TODO
-
-* More complete test suite
-* Setup test coverage
-
-Will it have async options and AJAX loaded options? Not for now. You are welcome to implement it and contribute to it, though.
