@@ -12,6 +12,7 @@ const Input = React.createClass({
     onTagDeleted: PropTypes.func.isRequired,
     onKeyDown: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
+    tagStyler: PropTypes.func,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     onBlur: PropTypes.func,
   },
@@ -27,9 +28,10 @@ const Input = React.createClass({
 
   getTags() {
     return this.props.tags.map((t, i) => {
+      const style = this.props.tagStyler ? this.props.tagStyler(t) : {};
       return (
         <Tag selected={false} input='' text={t} addable={false}
-          deletable={true} key={t + '_' + i}
+          deletable={true} key={t + '_' + i} style={style}
           onDelete={() => this.props.onTagDeleted(i)} />
       );
     });

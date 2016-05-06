@@ -10,7 +10,8 @@ const Tag = React.createClass({
     addable: PropTypes.bool,
     deletable: PropTypes.bool,
     onAdd: PropTypes.func,
-    onDelete: PropTypes.func
+    onDelete: PropTypes.func,
+    style: PropTypes.object,
   },
 
   tagContent() {
@@ -67,7 +68,7 @@ const Tag = React.createClass({
     let cls = 'cti__tag' + (this.props.selected ? ' cti-selected' : '');
 
     return (
-      <div className={cls} onClick={this.onClick}>
+      <div className={cls} onClick={this.onClick} style={this.props.style}>
         <div className='cti__tag__content'>
           {this.tagContent()}
         </div>
