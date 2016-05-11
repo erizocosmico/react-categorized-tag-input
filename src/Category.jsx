@@ -25,11 +25,11 @@ const Category = React.createClass({
     getCreateNewText: PropTypes.func
   },
 
-  onAdd(item) {
+  onAdd(title) {
     return () => {
       this.props.onAdd({
         category: this.props.category,
-        item: item
+        title: title
       });
     };
   },

@@ -102,11 +102,11 @@ describe('Category', () => {
   });
 
   describe('when a tag is clicked', () => {
-    it('should trigger onAdd with category and item', done => {
+    it('should trigger onAdd with category and title', done => {
       let c = category(props({
         onAdd(o) {
           expect(o.category).toBe(1);
-          expect(o.item).toBe('foo');
+          expect(o.title).toBe('foo');
           done();
         }
       }));
