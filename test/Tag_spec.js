@@ -33,10 +33,10 @@ describe('Tag', () => {
 
       let spans = findContentSpans(t);
       expect(spans.length).toBe(2);
-      expect(spans[0].props.className).toBe('cti__tag__content--match');
-      expect(spans[0].props.children).toBe('foo');
-      expect(spans[1].props.className).toBe('cti__tag__content--regular');
-      expect(spans[1].props.children).toBe('able');
+      expect(spans[0].className).toBe('cti__tag__content--match');
+      expect(spans[0].innerHTML).toBe('foo');
+      expect(spans[1].className).toBe('cti__tag__content--regular');
+      expect(spans[1].innerHTML).toBe('able');
     });
   });
 
@@ -50,11 +50,11 @@ describe('Tag', () => {
       let spans = findContentSpans(t);
       expect(spans.length).toBe(3);
       expect(spans[0].className).toBe('cti__tag__content--regular');
-      expect(spans[0].props.children).toBe('fo');
-      expect(spans[1].props.className).toBe('cti__tag__content--match');
-      expect(spans[1].props.children).toBe('oab');
-      expect(spans[2].props.className).toBe('cti__tag__content--regular');
-      expect(spans[2].props.children).toBe('le');
+      expect(spans[0].innerHTML).toBe('fo');
+      expect(spans[1].className).toBe('cti__tag__content--match');
+      expect(spans[1].innerHTML).toBe('oab');
+      expect(spans[2].className).toBe('cti__tag__content--regular');
+      expect(spans[2].innerHTML).toBe('le');
     });
   });
 
@@ -67,10 +67,10 @@ describe('Tag', () => {
 
       let spans = findContentSpans(t);
       expect(spans.length).toBe(2);
-      expect(spans[0].props.className).toBe('cti__tag__content--regular');
-      expect(spans[0].props.children).toBe('foo');
-      expect(spans[1].props.className).toBe('cti__tag__content--match');
-      expect(spans[1].props.children).toBe('able');
+      expect(spans[0].className).toBe('cti__tag__content--regular');
+      expect(spans[0].innerHTML).toBe('foo');
+      expect(spans[1].className).toBe('cti__tag__content--match');
+      expect(spans[1].innerHTML).toBe('able');
     });
   });
 
