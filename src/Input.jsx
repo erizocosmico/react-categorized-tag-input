@@ -41,7 +41,7 @@ const Input = React.createClass({
       return (
         <Tag selected={false} input='' text={this.props.transformTag(tag)} addable={false}
           deletable={true} key={tag.title + '_' + i}
-          onDelete={() => this.props.onTagDeleted(i)} 
+          onDelete={() => this.props.onTagDeleted(i)}
           style={this.props.getTagStyle(tag)}/>
       );
     });
@@ -55,8 +55,9 @@ const Input = React.createClass({
   },
 
   render() {
+    const placeholder = this.props.placeholder || '';
     let size = this.props.value.length === 0 ?
-      this.props.placeholder.length :
+      placeholder.length :
       this.props.value.length;
     return (
       <div className='cti__input' onClick={this.focusInput}>
@@ -65,7 +66,7 @@ const Input = React.createClass({
           size={size + 2}
           onFocus={this.props.openPanel} onBlur={this.onBlur}
           onChange={this.props.onValueChange} onKeyDown={this.props.onKeyDown}
-          placeholder={this.props.placeholder} aria-label={this.props.placeholder}
+          placeholder={placeholder} aria-label={placeholder}
           className='cti__input__input' />
         <div className='cti__input__arrow' />
       </div>
