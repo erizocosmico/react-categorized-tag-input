@@ -44,6 +44,7 @@ The props are very straightforward.
 |getTagStyle|function| A function from the tag text (string) to an object with any or all of the following keys: `base`, `content` and `delete`. The values are React style objects. This example renders 1-letter long tags in red: `text => text.length === 1 ? {base: {color: "red"}} : {}` | () => ({}) |
 |getCreateNewText|function| A function that returns the text to display when the user types an unrecognized tag, given a title and text.| (title, text) => `Create new ${title} "${text}"` |
 |inputClass|string| Optional, overwrite default class for the <input> element.|cti__input__input|
+|inputAutoSize|bool| Optional, update the <input> size attribute with the text length.|true|
 
 #### The tag object
 Tag objects look like this:
