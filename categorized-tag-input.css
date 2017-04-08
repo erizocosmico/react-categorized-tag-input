@@ -66,6 +66,7 @@
 .cti__tag__delete, .cti__tag__content, .cti__tag__content > span {
   display: inline-block;
   vertical-align: middle;
+  white-space: pre;
 }
 
 .cti__tag__delete {
