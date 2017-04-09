@@ -72,7 +72,11 @@ const CategorizedTagInput = React.createClass({
   filterCategories(input) {
     let categories = this.props.categories.map(c => {
       c = Object.assign({}, c, {
-        items: c.items.filter(this.filterItems(input))
+        items: (c.title.toLowerCase() === input.toLowerCase()) ?
+            //show all the tags if he types the category name
+            //can be used as help/list/explain/explore feature
+            c.items.slice() :
+            c.items.filter(this.filterItems(input))
       });
       return (c.items.length === 0 && (!this.state.addNew || c.single)) ? null : c;
     }).filter(c => c !== null);
