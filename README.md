@@ -66,7 +66,7 @@ The category object for the dataset looks like this:
   title: 'Title displayed on the category row',
   items: ['Array', 'With', 'Tags'],
   single: optional boolean. If is true the row will be treated as one-valued row. It does not have the option of adding new items to the category
-  addNew: optional boolean. Explicity allow or dissalow for a category to receive new tags, from the user.
+  addNew: optional boolean. Explicity allow or disallow for a category to receive new tags, from the user.
 }
 ```
 

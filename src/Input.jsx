@@ -58,10 +58,10 @@ const Input = React.createClass({
 
   render() {
     const placeholder = this.props.placeholder || '';
-    let extraProps = {};
+    let size = null;
 
-    if (this.props.inputAutoSize){
-        extraProps["size"] = (this.props.value.length === 0 ?
+    if (this.props.inputAutoSize) {
+        size = (this.props.value.length === 0 ?
           placeholder.length :
           this.props.value.length) + 2
     }
@@ -70,11 +70,11 @@ const Input = React.createClass({
       <div className='cti__input' onClick={this.focusInput}>
         {this.getTags()}
         <input type='text' ref='input' value={this.props.value}
-          {...extraProps}
+          size={size}
           onFocus={this.props.openPanel} onBlur={this.onBlur}
           onChange={this.props.onValueChange} onKeyDown={this.props.onKeyDown}
           placeholder={placeholder} aria-label={placeholder}
-          className={this.props.inputClass === undefined ? 'cti__input__input' : this.props.inputClass} />
+          className={!this.props.inputClass ? 'cti__input__input' : this.props.inputClass} />
         <div className='cti__input__arrow' />
       </div>
     );
