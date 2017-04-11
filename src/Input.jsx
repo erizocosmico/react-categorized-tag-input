@@ -16,7 +16,9 @@ const Input = React.createClass({
     placeholder: PropTypes.string,
     onBlur: PropTypes.func,
     getTagStyle: PropTypes.func,
-    transformTag: PropTypes.func
+    transformTag: PropTypes.func,
+    inputClass: PropTypes.string,
+    inputAutoSize: PropTypes.bool
   },
 
   focusInput() {
@@ -56,18 +58,23 @@ const Input = React.createClass({
 
   render() {
     const placeholder = this.props.placeholder || '';
-    let size = this.props.value.length === 0 ?
-      placeholder.length :
-      this.props.value.length;
+    let size = null;
+
+    if (this.props.inputAutoSize) {
+        size = (this.props.value.length === 0 ?
+          placeholder.length :
+          this.props.value.length) + 2
+    }
+
     return (
       <div className='cti__input' onClick={this.focusInput}>
         {this.getTags()}
         <input type='text' ref='input' value={this.props.value}
-          size={size + 2}
+          size={size}
           onFocus={this.props.openPanel} onBlur={this.onBlur}
           onChange={this.props.onValueChange} onKeyDown={this.props.onKeyDown}
           placeholder={placeholder} aria-label={placeholder}
-          className='cti__input__input' />
+          className={!this.props.inputClass ? 'cti__input__input' : this.props.inputClass} />
         <div className='cti__input__arrow' />
       </div>
     );

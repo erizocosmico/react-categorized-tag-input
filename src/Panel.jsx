@@ -21,7 +21,7 @@ const Panel = React.createClass({
         <Category key={c.id} items={c.items} category={c.id} title={c.title}
           selected={this.props.selection.category === i}
           selectedItem={this.props.selection.item}
-          input={this.props.input} addNew={this.props.addNew}
+          input={this.props.input} addNew={c.addNew===undefined ? this.props.addNew : !!c.addNew}
           type={c.type} onAdd={this.props.onAdd} single={c.single}
           getTagStyle={this.props.getTagStyle}
           getCreateNewText={this.props.getCreateNewText} />
