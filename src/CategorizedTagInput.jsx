@@ -20,7 +20,7 @@ export function isCategoryValid(c) {
     && (c.type || c.single);
 }
 
-const CategorizedTagInput = React.createClass({
+const CategorizedTagInput = createReactClass({
   propTypes: {
     addNew: PropTypes.bool,
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,

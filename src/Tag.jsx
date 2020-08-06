@@ -2,7 +2,9 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const Tag = React.createClass({
+import createReactClass from 'create-react-class';
+
+const Tag = createReactClass({
   propTypes: {
     selected: PropTypes.bool,
     input: PropTypes.string.isRequired,

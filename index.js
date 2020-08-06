@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createReactClass from 'create-react-class';
 
 import Input from './src/index';
 
@@ -53,7 +54,7 @@ function getCreateNewText(title, text){
   return `create new ${title} "${text}"`
 }
 
-const Wrap = React.createClass({
+const Wrap = createReactClass({
   getInitialState() {
     return {
       editable: true,

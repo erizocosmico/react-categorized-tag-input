@@ -4,7 +4,9 @@ import Tag from './Tag.jsx';
 
 import PropTypes from 'prop-types';
 
-const Input = React.createClass({
+import createReactClass from 'create-react-class';
+
+const Input = createReactClass({
   propTypes: {
     openPanel: PropTypes.func.isRequired,
     closePanel: PropTypes.func.isRequired,

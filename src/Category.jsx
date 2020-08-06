@@ -4,9 +4,11 @@ import Tag from './Tag.jsx';
 
 import PropTypes from 'prop-types';
 
+import createReactClass from 'create-react-class';
+
 const getCreateNewText = (title, text) => `Create new ${title} "${text}"`
 
-const Category = React.createClass({
+const Category = createReactClass({
   propTypes: {
     items: PropTypes.array.isRequired,
     category: PropTypes.oneOfType([
