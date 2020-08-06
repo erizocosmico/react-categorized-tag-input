@@ -6,6 +6,8 @@ import * as key from './keyboard';
 
 import PropTypes from 'prop-types';
 
+import createReactClass from 'create-react-class';
+
 export function isCategoryItemValid(i) {
   return typeof i === 'string' && i.trim().length > 0;
 }
