@@ -2,7 +2,7 @@ import React from 'react';
 
 import Tag from './Tag.jsx';
 
-const { PropTypes } = React;
+import PropTypes from 'prop-types';
 
 const Input = React.createClass({
   propTypes: {

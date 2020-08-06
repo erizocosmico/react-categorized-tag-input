@@ -4,7 +4,7 @@ import Input from './Input.jsx';
 import Panel from './Panel.jsx';
 import * as key from './keyboard';
 
-const { PropTypes } = React;
+import PropTypes from 'prop-types';
 
 export function isCategoryItemValid(i) {
   return typeof i === 'string' && i.trim().length > 0;
