@@ -2,9 +2,11 @@ import React from 'react';
 
 import Category from './Category.jsx';
 
-const { PropTypes } = React;
+import PropTypes from 'prop-types';
 
-const Panel = React.createClass({
+import createReactClass from 'create-react-class';
+
+const Panel = createReactClass({
   propTypes: {
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
     selection: PropTypes.object.isRequired,

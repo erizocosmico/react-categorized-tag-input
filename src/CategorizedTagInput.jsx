@@ -4,7 +4,9 @@ import Input from './Input.jsx';
 import Panel from './Panel.jsx';
 import * as key from './keyboard';
 
-const { PropTypes } = React;
+import PropTypes from 'prop-types';
+
+import createReactClass from 'create-react-class';
 
 export function isCategoryItemValid(i) {
   return typeof i === 'string' && i.trim().length > 0;
@@ -20,7 +22,7 @@ export function isCategoryValid(c) {
     && (c.type || c.single);
 }
 
-const CategorizedTagInput = React.createClass({
+const CategorizedTagInput = createReactClass({
   propTypes: {
     addNew: PropTypes.bool,
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
